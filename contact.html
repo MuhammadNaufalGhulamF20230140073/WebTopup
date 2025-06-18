@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact - Valotopup</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-b from-[#031a41] to-[#122242] text-white font-sans min-h-screen">
+
+  <!-- Navbar -->
+  <nav class="bg-red-600 p-4 text-white flex justify-between items-center">
+    <div class="font-bold text-xl">VALOTOPUP</div>
+    <div class="space-x-6">
+      <a href="index.html" class="hover:underline">Home</a>
+      <a href="product.html" class="hover:underline">Product</a>
+      <a href="contact.html" class="hover:underline font-semibold underline">Contact</a>
+      <a href="login.html" class="hover:underline">Login</a>
+    </div>
+  </nav>
+
+  <header class="p-8 bg-[#031a41]">
+    <div class="max-w-7xl mx-auto">
+      <h1 class="text-3xl font-bold mb-3">Hubungi Kami!</h1>
+      <p class="mb-6 max-w-xl leading-relaxed">
+        Mengalami masalah dengan waktu transaksi? Ingin memiliki bisnis permainan kredit? Silakan hubungi kami di bawah ini sesuai dengan kebutuhan Kamu!
+      </p>
+      <p class="mb-1 text-lg">Indonesia</p>
+      <div class="flex items-center space-x-6 text-base">
+        <div class="flex items-center space-x-2">
+          <i class="fas fa-envelope"></i>
+          <a href="mailto:cs.taraartstopup@gmail.com" class="hover:underline">cs.topupvalomurah12@gmail.com</a>
+        </div>
+        <div class="flex items-center space-x-2">
+          <i class="fas fa-phone"></i>
+          <a href="tel:+6289520291877" class="hover:underline">08123456789</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="mt-12 max-w-4xl mx-auto px-6">
+    <div class="flex justify-center mb-8">
+      <img src="IMAGE/Logo.jpg" alt="Topupvalo" class="h-24" />
+    </div>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-2">Formulir Laporan / Permintaan</h2>
+      <p class="mb-6 leading-relaxed max-w-xl">
+        Silahkan isi formulir di bawah ini untuk melaporkan masalah yang Kamu alami. Tim kami akan segera menindaklanjuti laporan Kamu.
+      </p>
+
+      <form action="#" method="POST" class="space-y-6" id="contact-form">
+
+        <!-- Dropdown Individu -->
+        <select name="individu" required class="w-full rounded-md bg-blue-700 text-white px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <option value="Individu" selected>Individu</option>
+          <option value="Perusahaan">Perusahaan</option>
+          <option value="Organisasi">Organisasi</option>
+          <option value="Lainnya">Lainnya</option>
+        </select>
+
+        <!-- Dropdown Tipe -->
+        <label class="block text-sm font-medium mb-1" for="tipe">Tipe</label>
+        <select id="tipe" name="tipe" required class="w-full rounded-md bg-blue-700 text-white px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-400">
+          <option disabled selected>Pilih Tipe</option>
+          <option value="Keluhan">Keluhan</option>
+          <option value="Pertanyaan">Pertanyaan</option>
+          <option value="Permintaan">Permintaan</option>
+          <option value="Lainnya">Lainnya</option>
+        </select>
+
+        <!-- Input Nama -->
+        <label class="block text-sm font-medium mb-1" for="nama">Nama Kamu</label>
+        <input id="nama" name="nama" type="text" placeholder="Nama Kamu" required
+          class="w-full rounded-md bg-blue-700 text-white px-4 py-3 placeholder:text-blue-200 placeholder:italic focus:outline-none focus:ring-2 focus:ring-blue-400" />
+
+        <!-- Nomor WhatsApp -->
+        <label class="block text-sm font-medium mb-1" for="whatsapp">Nomor WhatsApp</label>
+        <div class="flex items-center gap-2">
+          <div class="flex items-center bg-blue-800 rounded-l-md px-3 py-3">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Indonesia.svg" alt="Indonesia flag" class="h-5 w-5" />
+            <span class="ml-2 text-sm">+62</span>
+          </div>
+          <input id="whatsapp" name="whatsapp" type="tel" placeholder="81234567890" required
+            class="flex-grow rounded-r-md bg-blue-700 text-white px-4 py-3 placeholder:text-blue-200 placeholder:italic focus:outline-none focus:ring-2 focus:ring-blue-400" />
+        </div>
+
+        <!-- Deskripsi -->
+        <label class="block text-sm font-medium mb-1" for="deskripsi">Deskripsi</label>
+        <textarea id="deskripsi" name="deskripsi" rows="4" placeholder="Tulis Pesan Kamu..." required
+          class="w-full rounded-md bg-blue-700 text-white px-4 py-3 placeholder:text-blue-200 placeholder:italic focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+
+        <!-- reCaptcha -->
+        <div class="g-recaptcha" data-sitekey="your-site-key" data-theme="dark"></div>
+
+        <p class="text-sm text-blue-300 mt-2 flex items-center gap-2">
+          <i class="fas fa-sync-alt animate-spin"></i>
+          Klik reload jika captcha error/failed.
+        </p>
+
+        <!-- Submit Button -->
+        <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 transition-colors font-semibold rounded-md py-3 mt-4">
+          Kirim Pesan
+        </button>
+
+      </form>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-[#031a41] text-gray-400 p-6 mt-12 text-center text-sm">
+    &copy; 2025 VALOTOPUP. All rights reserved.
+  </footer>
+
+</body>
+</html>

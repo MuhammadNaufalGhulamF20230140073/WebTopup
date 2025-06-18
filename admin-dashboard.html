@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Admin Dashboard - Manajemen Produk Top Up</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body class="bg-[#122242] text-white min-h-screen flex flex-col items-center">
+
+    <script>
+        // Cegah user biasa akses halaman admin
+        if (localStorage.getItem("role") !== "admin") {
+            window.location.href = "login.html";
+        }
+    </script>
+
+    <header class="w-full bg-red-600 text-white py-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <span class="font-bold text-2xl">Admin Dashboard</span>
+            <a href="logout.html" class="hover:underline">Logout</a>
+        </div>
+    </header>
+
+    <main class="flex-grow flex flex-col justify-center items-center w-full max-w-2xl">
+        <h1 class="text-3xl font-bold mb-8 text-red-600 mt-12 text-center">Manajemen Produk Top Up</h1>
+        <!-- Form Tambah Produk -->
+        <form id="addProductForm" class="flex flex-col md:flex-row gap-2 mb-6 w-full">
+            <input type="text" id="productName" placeholder="Contoh: 475 Points" required class="rounded p-2 flex-1 text-black" />
+            <input type="number" id="productPrice" placeholder="Harga (Contoh: 55293)" required class="rounded p-2 flex-1 text-black" min="1" />
+            <button type="submit" class="bg-red-600 text-white px-4 rounded hover:bg-red-700">Tambah</button>
+        </form>
+        <!-- Tabel Produk -->
+        <div class="overflow-x-auto w-full">
+            <table class="min-w-full bg-white rounded shadow text-black">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2">Nama Produk</th>
+                        <th class="px-4 py-2">Harga</th>
+                        <th class="px-4 py-2">Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="productTableBody">
+                    <!-- Data produk otomatis diisi oleh JS -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-6 mt-auto w-full text-center">
+        <p>&copy; 2025 VALOTOPUP. All rights reserved.</p>
+    </footer>
+    <script src="assets/js/admin-crud.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>User Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+
+<body class="bg-[#122242] text-white min-h-screen flex flex-col">
+
+    <script>
+        // Proteksi akses, kalau bukan user redirect ke login
+        if (localStorage.getItem("role") !== "user") {
+            window.location.href = "login.html";
+        }
+    </script>
+
+    <nav class="bg-red-600 p-4 text-white flex justify-between items-center">
+        <div class="font-bold text-xl">VALOTOPUP</div>
+        <div><a href="logout.html" class="hover:underline">Logout</a></div>
+    </nav>
+
+    <main class="container mx-auto p-6 flex-grow">
+        <h1 class="text-3xl font-bold mb-6 text-center text-red-600">Pesan Top Up Valorant</h1>
+
+        <form id="orderForm" class="bg-[#162f6e] p-6 rounded-lg max-w-lg mx-auto">
+            <label class="block mb-1 font-medium" for="riot-id">Riot ID</label>
+            <input type="text" id="riot-id" required placeholder="Masukkan Riot ID" class="w-full rounded-md px-4 py-2 text-black mb-4" />
+            <label class="block mb-1 font-medium" for="produk">Pilih Nominal</label>
+            <select id="produk" class="w-full rounded-md px-4 py-2 text-black mb-4"></select>
+            <button class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-bold">Pesan Sekarang</button>
+        </form>
+
+        <div id="order-result" class="mt-6 text-center text-lg text-green-400 font-bold"></div>
+    </main>
+
+    <script>
+        // Fetch produk dari backend (API) dan render ke select
+        fetch("api/produk-list.php")
+            .then(res => res.json())
+            .then(products => {
+                const select = document.getElementById('produk');
+                products.forEach(prod => {
+                    select.innerHTML += `<option value="${prod.id}">${prod.nama} - Rp ${parseInt(prod.harga).toLocaleString()}</option>`;
+                });
+            });
+
+        // Form order (pesanan ke backend, nanti)
+        document.getElementById('orderForm').onsubmit = function(e) {
+            e.preventDefault();
+            const riotId = document.getElementById('riot-id').value.trim();
+            const produkId = document.getElementById('produk').value;
+            // Kirim order ke backend (nanti pakai API order-add.php)
+            fetch('api/order-add.php', {
+                    method: "POST",
+                    body: new URLSearchParams({
+                        riot_id: riotId,
+                        produk_id: produkId
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('order-result').textContent = "Pesanan kamu berhasil dibuat!";
+                    } else {
+                        document.getElementById('order-result').textContent = "Gagal membuat pesanan!";
+                    }
+                });
+        };
+    </script>
+</body>
+
+</html>

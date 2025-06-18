@@ -1,0 +1,41 @@
+-- BUAT DATABASE
+CREATE DATABASE IF NOT EXISTS db_topup;
+USE db_topup;
+
+-- TABEL USER (ADMIN & USER)
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    no_hp VARCHAR(20) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('admin','user') NOT NULL
+);
+
+-- DATA ADMIN & USER (NOMOR HP dan PASSWORD JANGAN LUPA!)
+INSERT INTO users (no_hp, password, role) VALUES
+('089876543210', 'admin123', 'admin'),
+('081234567890', 'user123', 'user');
+
+-- TABEL PRODUK (HANYA ISI YANG VALID)
+DROP TABLE IF EXISTS produk;
+CREATE TABLE produk (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nama VARCHAR(255) NOT NULL,
+    harga INT NOT NULL
+);
+
+-- DATA PRODUK SESUAI PILIHAN DI WEB
+INSERT INTO produk (nama, harga) VALUES
+('475 Points', 55293),
+('2050 Points', 221168),
+('3650 Points', 384081),
+('5350 Points', 551931),
+('11000 Points', 1085102);
+
+CREATE TABLE IF NOT EXISTS pesanan (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    riot_id VARCHAR(100) NOT NULL,
+    produk_id INT NOT NULL,
+    tgl_pesan TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (produk_id) REFERENCES produk(id)
+);

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valorant Top Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body class="bg-[#0B173E] text-white min-h-screen flex flex-col">
+    <!-- Header with Navigation -->
+    <header class="bg-red-600 text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="text-2xl font-bold">VALOTOPUP</div>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="index.html" class="text-white hover:underline font-semibold underline">Home</a></li>
+                    <li><a href="product.html" class="text-white hover:underline">Product</a></li>
+                    <li><a href="contact.html" class="text-white hover:underline">Contact</a></li>
+                    <li>
+                        <a href="login.html" class="hover:text-gray-200 font-semibold">Login</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Promo Slider -->
+    <div class="relative w-full max-w-6xl mx-auto bg-[#1a202c] p-4 rounded-lg overflow-hidden mt-8">
+
+        <!-- Slide Container -->
+        <div class="relative h-64 md:h-96 rounded-lg overflow-hidden">
+            <div class="absolute inset-0 transition-opacity duration-700 opacity-0 z-0 slide">
+                <img src="assets/images/Promo1.jpg" alt="Promo 1" class="w-full h-full object-cover rounded-lg" />
+            </div>
+            <div class="absolute inset-0 transition-opacity duration-700 opacity-0 z-0 slide">
+                <img src="assets/images/Promo2.png" alt="Promo 2" class="w-full h-full object-cover rounded-lg" />
+            </div>
+            <div class="absolute inset-0 transition-opacity duration-700 opacity-0 z-0 slide">
+                <img src="assets/images/Promo3.jpg" alt="Promo 3" class="w-full h-full object-cover rounded-lg" />
+            </div>
+        </div>
+        <!-- Navigation Buttons -->
+        <button id="prevBtn" aria-label="Previous Slide" class="absolute top-1/2 left-2 transform -translate-y-1/2 bg-white bg-opacity-30 hover:bg-opacity-70 rounded-full p-2 text-white text-2xl font-bold z-20 select-none">
+            &#8249;
+        </button>
+        <button id="nextBtn" aria-label="Next Slide" class="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white bg-opacity-30 hover:bg-opacity-70 rounded-full p-2 text-white text-2xl font-bold z-20 select-none">
+            &#8250;
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="container mx-auto px-4 py-12 text-center">
+        <h1 class="text-4xl font-bold text-red-600 mb-4">Selamat Datang di VALOTOPUP</h1>
+        <p class="text-xl text-white-700 mb-8">Top Up Valorant RP dengan harga terbaik dan proses cepat!</p>
+        <div class="text-center mt-8">
+            <a href="product.html" class="inline-block bg-red-600 text-white font-bold py-3 px-6 rounded hover:bg-red-700 transition">
+                Lihat Produk
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 mt-auto">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 VALOTOPUP. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Slider (Eksternal) -->
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
