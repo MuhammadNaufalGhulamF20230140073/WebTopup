@@ -62,4 +62,60 @@
     </script>
 </body>
 
+<script>
+    document.getElementById('registerForm').onsubmit = async function(e) {
+        e.preventDefault();
+
+        // Ambil nilai input
+        const hp = document.getElementById('hp').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        // Element pesan
+        const errorDiv = document.getElementById('errorMsg');
+        const successDiv = document.getElementById('successMsg');
+        if (errorDiv) errorDiv.classList.add('hidden');
+        if (successDiv) successDiv.classList.add('hidden');
+
+        // Validasi simple
+        if (!hp || !password) {
+            if (errorDiv) {
+                errorDiv.textContent = "Nomor HP dan Password harus diisi!";
+                errorDiv.classList.remove('hidden');
+            }
+            return;
+        }
+
+        // Kirim ke API register
+        try {
+            const res = await fetch('api/register.php', {
+                method: 'POST',
+                body: new URLSearchParams({
+                    hp,
+                    password
+                })
+            });
+            const data = await res.json();
+
+            if (data.success) {
+                if (successDiv) successDiv.classList.remove('hidden');
+                document.getElementById('registerForm').reset();
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 1200);
+            } else {
+                if (errorDiv) {
+                    errorDiv.textContent = data.message || "Nomor HP sudah terdaftar!";
+                    errorDiv.classList.remove('hidden');
+                }
+            }
+        } catch (err) {
+            if (errorDiv) {
+                errorDiv.textContent = "Terjadi error koneksi server!";
+                errorDiv.classList.remove('hidden');
+            }
+        }
+    };
+</script>
+
+
 </html>

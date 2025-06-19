@@ -1,16 +1,17 @@
 <?php
-include "../koneksi.php";
+include "koneksi.php";
+
 
 $no_hp = $_POST['hp'];
 $password = $_POST['password'];
-$role = "user"; // default user
+$role = "user"; // default role user
 
 if (!$no_hp || !$password) {
     echo json_encode(["success" => false, "message" => "Semua field harus diisi."]);
     exit;
 }
 
-// Cek apakah nomor sudah ada
+// Cek nomor sudah terdaftar
 $q = mysqli_query($conn, "SELECT * FROM users WHERE no_hp='$no_hp'");
 if (mysqli_num_rows($q) > 0) {
     echo json_encode(["success" => false, "message" => "Nomor HP sudah terdaftar!"]);

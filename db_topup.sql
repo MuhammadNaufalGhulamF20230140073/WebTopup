@@ -8,13 +8,14 @@ CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     no_hp VARCHAR(20) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    role ENUM('admin','user') NOT NULL
+    role ENUM('user','admin') NOT NULL DEFAULT 'user'
 );
+
 
 -- DATA ADMIN & USER (NOMOR HP dan PASSWORD JANGAN LUPA!)naufal123,admin123
 INSERT INTO users (no_hp, password, role) VALUES
 ('089876543210', '$2y$10$FFvqNn3qGXY2EVingJg4KeNZlYG8WLu.BinllIP3bxyTRCj2YRxlS', 'admin'),
-('081234567890', '$2y$10$KcIqUni.8ayimUWvoVJe0.q7vdE/xCSC7CXr86ZFvDTCICnTLQQPG', 'user');
+('081234567890', '$2y$10$eeS3zlHYG/J5RoV79KgeJ.H4eROPi7yNBnon2.xt1XWHeUdzZbH9y', 'user');
 
 -- TABEL PRODUK (HANYA ISI YANG VALID)
 DROP TABLE IF EXISTS produk;
