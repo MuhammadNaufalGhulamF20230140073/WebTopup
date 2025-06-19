@@ -156,6 +156,21 @@
     </script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/user-dashboard.js"></script>
+    <script>
+        // Script untuk tombol pesan sekarang
+        orderBtn.addEventListener('click', function() {
+            const role = localStorage.getItem('role');
+            if (!role) {
+                alert("Anda harus login dulu untuk memesan!");
+                window.location.href = "login.html";
+                return;
+            }
+            // Lanjut proses order di sini (misal kirim ke API order)
+            alert("Order diproses (simulasi)");
+            // Di sini bisa fetch('api/order-add.php', ...)
+        });
+    </script>
+
 
 </body>
 
