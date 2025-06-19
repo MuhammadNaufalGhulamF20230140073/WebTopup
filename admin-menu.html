@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Admin Menu - VALOTOPUP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            background: linear-gradient(120deg, #0B173E 60%, #2C3E50 100%);
+            min-height: 100vh;
+        }
+        
+        .menu-card {
+            border-radius: 18px;
+            box-shadow: 0 6px 24px rgba(11, 23, 62, 0.10);
+            transition: 0.13s;
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-3px) scale(1.035);
+            box-shadow: 0 8px 36px rgba(11, 23, 62, 0.15);
+        }
+        
+        .icon-lg {
+            font-size: 2.7rem;
+        }
+        
+        .logout-btn {
+            position: absolute;
+            right: 32px;
+            top: 28px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Proteksi agar hanya admin yang bisa akses -->
+    <script>
+        if (localStorage.getItem("role") !== "admin") {
+            window.location.href = "login.html";
+        }
+    </script>
+
+    <nav class="navbar navbar-dark bg-danger px-4 py-3 position-relative">
+        <span class="navbar-brand fw-bold fs-4">Admin Dashboard</span>
+        <button class="btn btn-outline-light logout-btn" onclick="logout()">Logout</button>
+    </nav>
+
+    <div class="container d-flex flex-column align-items-center justify-content-center" style="min-height: 90vh;">
+        <h2 class="fw-bold text-white mb-5 mt-4">Selamat datang, Admin!</h2>
+        <div class="row g-5 justify-content-center w-100">
+            <!-- CRUD Produk -->
+            <div class="col-12 col-md-4">
+                <a href="admin-dashboard.html" class="text-decoration-none">
+                    <div class="menu-card bg-white p-4 text-center h-100">
+                        <div class="text-danger mb-2 icon-lg">
+                            <i class="bi bi-box-seam"></i>
+                        </div>
+                        <h5 class="fw-bold mb-1">Manajemen Produk</h5>
+                        <p class="text-secondary">Tambah, edit, dan hapus produk top up.</p>
+                    </div>
+                </a>
+            </div>
+            <!-- CRUD Pesanan -->
+            <div class="col-12 col-md-4">
+                <a href="admin-orders.html" class="text-decoration-none">
+                    <div class="menu-card bg-white p-4 text-center h-100">
+                        <div class="text-primary mb-2 icon-lg">
+                            <i class="bi bi-receipt"></i>
+                        </div>
+                        <h5 class="fw-bold mb-1">Manajemen Pesanan</h5>
+                        <p class="text-secondary">Lihat & kelola pesanan pengguna.</p>
+                    </div>
+                </a>
+            </div>
+            <!-- Management Pertanyaan/Contact -->
+            <div class="col-12 col-md-4">
+                <a href="admin-pertanyaan.html" class="text-decoration-none">
+                    <div class="menu-card bg-white p-4 text-center h-100">
+                        <div class="text-success mb-2 icon-lg">
+                            <i class="bi bi-chat-text"></i>
+                        </div>
+                        <h5 class="fw-bold mb-1">Manajemen Pertanyaan</h5>
+                        <p class="text-secondary">Lihat & balas pesan dari user.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <script>
+        function logout() {
+            localStorage.removeItem('role');
+            localStorage.removeItem('no_hp');
+            window.location.href = "login.html";
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -33,10 +33,24 @@ INSERT INTO produk (nama, harga) VALUES
 ('5350 Points', 551931),
 ('11000 Points', 1085102);
 
-CREATE TABLE IF NOT EXISTS pesanan (
+DROP TABLE IF EXISTS pesanan;
+CREATE TABLE pesanan (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
     riot_id VARCHAR(100) NOT NULL,
     produk_id INT NOT NULL,
     tgl_pesan TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (produk_id) REFERENCES produk(id)
+);
+
+
+CREATE TABLE IF NOT EXISTS pertanyaan (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    individu VARCHAR(20) NOT NULL,
+    tipe VARCHAR(20) NOT NULL,
+    nama VARCHAR(100) NOT NULL,
+    whatsapp VARCHAR(20) NOT NULL,
+    deskripsi TEXT NOT NULL,
+    tgl_kirim TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

@@ -45,15 +45,15 @@
                 <p class="text-sm text-blue-300 italic mt-2">Please make sure you fill the correct account data</p>
             </div>
 
-            <!-- Pilih Nominal (diisi JS dari API, sama dengan product.html) -->
+            <!-- Pilih Nominal (diisi JS dari API) -->
             <div class="bg-[#162f6e] rounded-lg p-6">
                 <div class="flex items-center space-x-3 mb-3">
                     <div class="bg-blue-600 text-white rounded-full w-7 h-7 flex items-center justify-center font-semibold">2</div>
                     <h2 class="font-semibold text-lg flex items-center gap-2">Pilih Nominal
                         <span class="text-sm font-normal italic text-blue-300 flex items-center gap-1">
-              <i class="fas fa-clock"></i>
-              Top Up Instant
-            </span>
+                            <i class="fas fa-clock"></i>
+                            Top Up Instant
+                        </span>
                     </h2>
                 </div>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4 cursor-pointer" id="nominal-options">
@@ -65,8 +65,6 @@
 
         <!-- Sidebar -->
         <aside class="space-y-6">
-            <!-- Ulasan, Bantuan, Info produk terpilih, dsb. -->
-            <!-- Copy paste bagian sidebar dari product.html -->
             <div class="bg-[#192f51] p-6 rounded-lg">
                 <h3 class="font-semibold text-xl mb-2">Ulasan dan rating</h3>
                 <div class="flex items-center space-x-3">
@@ -92,26 +90,23 @@
                 Belum ada item produk yang dipilih.
             </div>
             <button id="order-btn" disabled class="w-full bg-blue-500 hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-md flex items-center justify-center gap-2">
-        <i class="fas fa-shopping-cart"></i>
-        Pesan Sekarang!
-      </button>
+                <i class="fas fa-shopping-cart"></i>
+                Pesan Sekarang!
+            </button>
         </aside>
     </main>
 
-    <!-- Script: isi produk & logout -->
-    <script src="assets/js/main.js"></script>
     <script>
         // Tampilkan info user di navbar
         document.getElementById("user-info").textContent = "Hai, " + localStorage.getItem("no_hp");
 
         // Tombol logout
         document.getElementById("logout-btn").onclick = function() {
-            localStorage.removeItem("role");
-            localStorage.removeItem("no_hp");
+            localStorage.clear();
             window.location.href = "login.html";
         };
 
-        // Copy script JS product.html (isi pilihan produk dari API, dsb.)
+        // --- PRODUK DAN ORDER ---
         const selectedInfo = document.getElementById("selected-info");
         const orderBtn = document.getElementById("order-btn");
         let selectedNominal = null;
@@ -126,20 +121,21 @@
                     item.setAttribute("tabindex", "0");
                     item.className = "nominal-item bg-[#1e367f] rounded-lg py-4 px-5 flex flex-col space-y-1 select-none ring-2 ring-transparent focus:ring-blue-500";
                     item.innerHTML = `
-            <span class="font-semibold text-white">${prod.nama}</span>
-            <span class="text-blue-400 font-semibold text-lg">Rp ${parseInt(prod.harga).toLocaleString()}</span>
-            <div class="flex justify-end mt-auto">
-              <span class="bg-white text-blue-600 text-xs px-2 py-0.5 rounded-md font-semibold select-none">Pengiriman INSTANT</span>
-            </div>
-          `;
+                        <span class="font-semibold text-white">${prod.nama}</span>
+                        <span class="text-blue-400 font-semibold text-lg">Rp ${parseInt(prod.harga).toLocaleString()}</span>
+                        <div class="flex justify-end mt-auto">
+                          <span class="bg-white text-blue-600 text-xs px-2 py-0.5 rounded-md font-semibold select-none">Pengiriman INSTANT</span>
+                        </div>
+                    `;
                     item.addEventListener("click", () => {
                         document.querySelectorAll(".nominal-item").forEach(i => {
                             i.classList.remove("ring-4", "ring-blue-400", "bg-blue-700");
                         });
                         item.classList.add("ring-4", "ring-blue-400", "bg-blue-700");
                         selectedNominal = {
+                            id: prod.id, // id produk untuk order
                             points: prod.nama,
-                            price: "Rp " + parseInt(prod.harga).toLocaleString()
+                            price: prod.harga
                         };
                         selectedInfo.textContent = `Produk dipilih: ${prod.nama} - Rp ${parseInt(prod.harga).toLocaleString()}`;
                         orderBtn.disabled = false;
@@ -153,25 +149,51 @@
                     container.appendChild(item);
                 });
             });
-    </script>
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/user-dashboard.js"></script>
-    <script>
-        // Script untuk tombol pesan sekarang
+
+        // Handle tombol Pesan Sekarang
         orderBtn.addEventListener('click', function() {
             const role = localStorage.getItem('role');
-            if (!role) {
+            const user_id = localStorage.getItem('user_id');
+            if (!role || !user_id) {
                 alert("Anda harus login dulu untuk memesan!");
                 window.location.href = "login.html";
                 return;
             }
-            // Lanjut proses order di sini (misal kirim ke API order)
-            alert("Order diproses (simulasi)");
-            // Di sini bisa fetch('api/order-add.php', ...)
+            const riot_id = document.getElementById('riot-id').value.trim();
+            if (!riot_id) {
+                alert("Masukkan Riot ID terlebih dahulu!");
+                return;
+            }
+            if (!selectedNominal) {
+                alert("Pilih produk terlebih dahulu!");
+                return;
+            }
+            // Kirim ke API order-add.php
+            fetch('api/order-add.php', {
+                    method: "POST",
+                    body: new URLSearchParams({
+                        user_id: user_id,
+                        produk_id: selectedNominal.id,
+                        riot_id: riot_id
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("Melanjutkan Ke Pembayaran!");
+                        document.getElementById('riot-id').value = "";
+                        selectedInfo.textContent = "Belum ada item produk yang dipilih.";
+                        orderBtn.disabled = true;
+                        document.querySelectorAll('.nominal-item').forEach(i => i.classList.remove("ring-4", "ring-blue-400", "bg-blue-700"));
+                        window.location.href = 'payment.html';
+
+                    } else {
+                        alert(data.message || "Gagal melakukan pemesanan.");
+                    }
+                })
+                .catch(() => alert("Gagal terhubung ke server!"));
         });
     </script>
-
-
 </body>
 
 </html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pembayaran QRIS - VALOTOPUP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(120deg, #0B173E 60%, #2C3E50 100%);
+            min-height: 100vh;
+        }
+        
+        .qris-img {
+            max-width: 250px;
+            border-radius: 16px;
+            border: 3px solid #e63946;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+        }
+        
+        .card {
+            border-radius: 18px;
+            box-shadow: 0 8px 40px rgba(11, 23, 62, 0.14);
+        }
+        
+        .btn-modern {
+            background: linear-gradient(90deg, #e63946, #457b9d);
+            border: none;
+            color: #fff;
+            font-weight: 600;
+            letter-spacing: .04em;
+            transition: 0.15s;
+        }
+        
+        .btn-modern:hover {
+            background: linear-gradient(90deg, #b02431, #274c77);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container d-flex flex-column justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="card p-4 text-center" style="max-width: 380px; width: 100%;">
+            <h2 class="mb-2 fw-bold text-danger">Pembayaran</h2>
+            <p class="mb-3 text-secondary">Scan QRIS di bawah ini untuk membayar:</p>
+            <img src="assets/qris/qris.jfif" alt="QRIS" class="qris-img my-3" />
+            <div class="mb-4">
+                <span class="badge bg-success bg-gradient">Metode: QRIS (All E-Wallet)</span>
+            </div>
+            <button class="btn btn-modern w-100 mb-2" onclick="konfirmasiPembayaran()">Saya Sudah Bayar</button>
+            <a href="user-dashboard.html" class="d-block mt-1 text-decoration-none text-secondary">Kembali ke Dashboard</a>
+        </div>
+    </div>
+    <script>
+        function konfirmasiPembayaran() {
+            // Jika ingin update ke server, tambahkan AJAX di sini
+            alert("Pembayaran dikonfirmasi (cuma simulasi pak :>). Terima kasih!");
+            window.location.href = "user-dashboard.html";
+        }
+    </script>
+    <!-- Bootstrap 5 JS (optional, untuk komponen interaktif) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
