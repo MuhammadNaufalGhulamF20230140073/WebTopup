@@ -1,0 +1,116 @@
+
+---------------------------------
+@startuml
+left to right direction
+
+actor User
+actor Admin
+
+rectangle "User Area" {
+    User -- (Home)
+    User -- (Product)
+    User -- (Contact)
+    User -- (Login)
+    (Login) -- (Tombol Login)
+(Tombol Login User) .u.> (Dashboard) : <<extend>>
+(Tombol Login User) .u.> (Pesan Sekarang!) : <<extend>>
+(Tombol Login User) .u.> (Logout User) : <<extend>>
+    
+    (Contact) .u.> (Kirim Pesan) : <<extend>>
+    (Kirim Pesan)
+}
+
+rectangle "Admin Area" {
+    Admin -- (Login)
+    (Login) -- (Tombol Login Admin)
+    
+    (Tombol Login Admin) .u.> (Tambah) : <<extend>>
+    (Tombol Login Admin) .u.> (Edit) : <<extend>>
+    (Tombol Login Admin) .u.> (Hapus) : <<extend>>
+    (Tombol Login Admin) .u.> (Logout Admin) : <<extend>>
+    
+    (Tambah)
+    (Edit)
+    (Hapus)
+    (Logout Admin)
+}
+@enduml
+----------------------------------
+@startuml
+left to right direction
+
+actor User
+actor Admin
+
+rectangle "User Area" {
+    User -- (Home)
+    (Home) .u.> (Lihat Produk) : <<include>>
+    (Lihat Produk) .u.> (Product) : <<include>>
+    
+    User -- (Contact)
+    (Contact) .u.> (Kirim Pesan) : <<extend>>
+    (Kirim Pesan)
+    
+    User -- (Login)
+    (Login) -- (Tombol Login User)
+    (Tombol Login User) .u.> (Dashboard) : <<extend>>
+    (Tombol Login User) .u.> (Pesan Sekarang!) : <<extend>>
+    (Tombol Login User) .u.> (Logout User) : <<extend>>
+}
+
+rectangle "Admin Area" {
+    Admin -- (Login)
+    (Login) -- (Tombol Login Admin)
+    
+    (Tombol Login Admin) .u.> (Tambah) : <<extend>>
+    (Tombol Login Admin) .u.> (Edit) : <<extend>>
+    (Tombol Login Admin) .u.> (Hapus) : <<extend>>
+    (Tombol Login Admin) .u.> (Logout Admin) : <<extend>>
+    
+    (Tambah)
+    (Edit)
+    (Hapus)
+    (Logout Admin)
+}
+@enduml
+
+----------------------------------------
+@startuml
+left to right direction
+
+actor User
+actor Admin
+
+rectangle "User Area" {
+    User -- (Home)
+    (Home) .u.> (Lihat Produk) : <<include>>
+    (Lihat Produk) .u.> (Product) : <<include>>
+    (Product) .u.> (Pesan Sekarang!) : <<extend>>
+
+    User -- (Contact)
+    (Contact) .u.> (Kirim Pesan) : <<extend>>
+    (Kirim Pesan)
+
+    User -- (Login)
+    (Login) -- (Tombol Login User)
+    (Tombol Login User) .u.> (Dashboard) : <<extend>>
+    (Tombol Login User) .u.> (Logout User) : <<extend>>
+}
+
+rectangle "Admin Area" {
+    Admin -- (Login)
+    (Login) -- (Tombol Login Admin)
+
+    (Tombol Login Admin) .u.> (Tambah) : <<extend>>
+    (Tombol Login Admin) .u.> (Edit) : <<extend>>
+    (Tombol Login Admin) .u.> (Hapus) : <<extend>>
+    (Tombol Login Admin) .u.> (Logout Admin) : <<extend>>
+
+    (Tambah)
+    (Edit)
+    (Hapus)
+    (Logout Admin)
+}
+@enduml
+
+

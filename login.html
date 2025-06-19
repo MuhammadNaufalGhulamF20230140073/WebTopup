@@ -23,45 +23,44 @@
             </div>
             <button type="submit" class="w-full bg-red-600 text-white font-bold py-2 px-4 rounded hover:bg-red-700 transition">Login</button>
         </form>
-        <div class="mt-4 text-center">
-            <a href="index.html" class="text-sm text-red-600 hover:underline">Kembali ke Home</a>
+        <div class="mt-4 text-center space-y-1">
+            <a href="index.html" class="text-sm text-red-600 hover:underline block">Kembali ke Home</a>
+            <a href="register.html" class="text-sm text-blue-600 hover:underline block">Belum punya akun? Register</a>
         </div>
-        <div id="errorMsg" class="text-red-600 text-sm text-center mt-2 hidden">Nomor HP atau Password salah!</div>
-    </div>
 
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        <script>
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
 
-            const no_hp = document.getElementById('hp').value.trim();
-            const password = document.getElementById('password').value.trim();
+                const no_hp = document.getElementById('hp').value.trim();
+                const password = document.getElementById('password').value.trim();
 
-            fetch('api/login.php', {
-                    method: 'POST',
-                    body: new URLSearchParams({
-                        no_hp,
-                        password
+                fetch('api/login.php', {
+                        method: 'POST',
+                        body: new URLSearchParams({
+                            no_hp,
+                            password
+                        })
                     })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-                        localStorage.setItem("role", data.role); // Simpan role untuk proteksi akses dashboard
-                        if (data.role === "admin") {
-                            window.location.href = "admin-dashboard.html";
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            localStorage.setItem("role", data.role); // Simpan role untuk proteksi akses dashboard
+                            if (data.role === "admin") {
+                                window.location.href = "admin-dashboard.html";
+                            } else {
+                                window.location.href = "user-dashboard.html";
+                            }
                         } else {
-                            window.location.href = "user-dashboard.html";
+                            document.getElementById('errorMsg').classList.remove('hidden');
                         }
-                    } else {
+                    })
+                    .catch(() => {
+                        document.getElementById('errorMsg').textContent = "Terjadi error pada server!";
                         document.getElementById('errorMsg').classList.remove('hidden');
-                    }
-                })
-                .catch(() => {
-                    document.getElementById('errorMsg').textContent = "Terjadi error pada server!";
-                    document.getElementById('errorMsg').classList.remove('hidden');
-                });
-        });
-    </script>
+                    });
+            });
+        </script>
 </body>
 
 </html>

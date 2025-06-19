@@ -11,10 +11,10 @@ CREATE TABLE users (
     role ENUM('admin','user') NOT NULL
 );
 
--- DATA ADMIN & USER (NOMOR HP dan PASSWORD JANGAN LUPA!)
+-- DATA ADMIN & USER (NOMOR HP dan PASSWORD JANGAN LUPA!)naufal123,admin123
 INSERT INTO users (no_hp, password, role) VALUES
-('089876543210', 'admin123', 'admin'),
-('081234567890', 'user123', 'user');
+('089876543210', '$2y$10$FFvqNn3qGXY2EVingJg4KeNZlYG8WLu.BinllIP3bxyTRCj2YRxlS', 'admin'),
+('081234567890', '$2y$10$KcIqUni.8ayimUWvoVJe0.q7vdE/xCSC7CXr86ZFvDTCICnTLQQPG', 'user');
 
 -- TABEL PRODUK (HANYA ISI YANG VALID)
 DROP TABLE IF EXISTS produk;

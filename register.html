@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Register - VALOTOPUP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#122242] min-h-screen flex items-center justify-center">
+
+    <div class="bg-white rounded-lg shadow-xl p-8 w-full max-w-md">
+        <h2 class="text-3xl font-bold mb-6 text-center text-red-600">Register</h2>
+        <form id="registerForm">
+            <div class="mb-4">
+                <label for="hp" class="block text-sm font-medium text-gray-700">Nomor HP</label>
+                <input type="text" id="hp" name="hp" required class="mt-1 w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-red-500" />
+            </div>
+            <div class="mb-4">
+                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" id="password" name="password" required class="mt-1 w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-red-500" />
+            </div>
+            <button type="submit" class="w-full bg-red-600 text-white font-bold py-2 px-4 rounded hover:bg-red-700 transition">Register</button>
+        </form>
+        <div class="mt-4 text-center">
+            <a href="login.html" class="text-sm text-red-600 hover:underline">Sudah punya akun? Login!</a>
+        </div>
+        <div id="errorMsg" class="text-red-600 text-sm text-center mt-2 hidden"></div>
+        <div id="successMsg" class="text-green-600 text-sm text-center mt-2 hidden">Registrasi berhasil, silakan login!</div>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').onsubmit = async function(e) {
+            e.preventDefault();
+            const hp = document.getElementById('hp').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('errorMsg');
+            const successDiv = document.getElementById('successMsg');
+            errorDiv.classList.add('hidden');
+            successDiv.classList.add('hidden');
+
+            const res = await fetch('api/register.php', {
+                method: 'POST',
+                body: new URLSearchParams({
+                    hp,
+                    password
+                })
+            });
+            const data = await res.json();
+            if (data.success) {
+                successDiv.classList.remove('hidden');
+                document.getElementById('registerForm').reset();
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 1500);
+            } else {
+                errorDiv.textContent = data.message || "Nomor HP sudah terdaftar!";
+                errorDiv.classList.remove('hidden');
+            }
+        };
+    </script>
+</body>
+
+</html>
