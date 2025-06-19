@@ -23,3 +23,35 @@ document.addEventListener("DOMContentLoaded", function() {
     // Tampilkan slide pertama saat halaman dimuat
     showSlide(currentIndex);
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Ambil elemen
+    const loginBtn = document.getElementById("login-btn");
+    const logoutBtn = document.getElementById("logout-btn");
+    const userInfo = document.getElementById("user-info");
+
+    // Deteksi login
+    const role = localStorage.getItem("role");
+    const no_hp = localStorage.getItem("no_hp");
+
+    if (role === "user" || role === "admin") {
+        // Sudah login
+        loginBtn.classList.add("hidden");
+        logoutBtn.classList.remove("hidden");
+        userInfo.textContent = `Hai, ${no_hp}`;
+    } else {
+        // Belum login
+        loginBtn.classList.remove("hidden");
+        logoutBtn.classList.add("hidden");
+        userInfo.textContent = "";
+    }
+
+    // Logout klik
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", function() {
+            localStorage.removeItem("role");
+            localStorage.removeItem("no_hp");
+            window.location.href = "login.html";
+        });
+    }
+});

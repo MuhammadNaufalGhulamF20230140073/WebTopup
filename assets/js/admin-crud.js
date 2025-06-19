@@ -41,6 +41,7 @@ document.getElementById("addProductForm").onsubmit = function(e) {
     }
 };
 
+
 // Hapus produk
 window.deleteProduct = function(id) {
     if (confirm("Yakin ingin menghapus produk?")) {
@@ -70,7 +71,15 @@ window.editProduct = function(id, namaLama, hargaLama) {
                 if (data.success) renderProducts();
                 else alert("Gagal edit produk!");
             });
+
     }
 }
 
 renderProducts();
+
+// Logout admin: hapus session localStorage & redirect ke index.html
+document.getElementById("logout-btn").onclick = function() {
+    localStorage.removeItem("role");
+    localStorage.removeItem("no_hp");
+    window.location.href = "index.html";
+};
