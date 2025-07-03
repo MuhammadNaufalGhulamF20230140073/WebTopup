@@ -6,9 +6,9 @@
 
 
 (Kelompok 5)
-63
-66
-62
-64
-93
-73
+63 Aulia Fikri
+66 Halim Bagus
+62 Yudha Pratama Putra
+64 R. Muhammad Fakhri W
+93 Farhat Asharfillah
+73 Muhammad Naufal Ghulam F
